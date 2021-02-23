@@ -1,0 +1,95 @@
+Escrever:
+git config --global user.name "Cristian Leoncini"
+Visualizar:
+git config user.name
+
+Escrever:
+git config --global user.email "crisvini.leoncini@outlook.com"
+Visualizar:
+git config user.email
+
+Escrever:
+git config --global core.editor "vscode"
+Visualizar:
+git config core.editor
+
+Visualizar tudo:
+git config --list
+
+Ver status da pasta:
+git status
+
+Iniciar Git em uma pasta:
+git init
+
+Adicionar todos os arquivos ao git:
+git add -A
+
+Fazer commit:
+git commit -m "Observações"
+
+Adicionar todos os arquivos ao git e fazer commit:
+git commit -am "Observações"
+
+Mostra a lista de todos os commits:
+git log
+
+Ver os branchs:
+git branch
+
+Retorna as alterações sem commitar:
+git reset --soft *id do commit*
+
+Retorna as alterações sem commitar e sem dar add:
+git reset --mixed *id do commit*
+
+Retorna as alterações ignorando as alterações feitas:
+git reset --hard *id do commit*
+
+Criar novo branch:
+git branch *nome*
+
+Trocar de branch: 
+git checkout *nome*
+
+Mostrar quais alterações foram feitas:
+git diff
+
+Mostrar o nome dos arquivos modificados:
+git diff --name-only
+
+Mostrar o nome de um arquivo especifico modificado:
+git diff *nome do arquivo*
+
+Voltar apenas um arquivo:
+git checkout HEAD -- *nome do arquivo*
+
+Adicionar repositório remoto:
+git remote add origin *ssh*
+
+Verificar se o repositório remoto foi criado:
+git remote
+
+Eviar o repositório para o GitHub:
+git push -u origin master
+
+Para o Git ignorar arquivos:
+Criar um arquivo .gitignore e adicionar o que deve ser ignorado
+
+Reverter commit:
+git revert --no-edit *id do commit*
+
+Deletar branch remoto:
+git push origin :*nome do branch*
+
+Deletar commit remoto:
+git push origin :*id do commit*
+
+Deletar branch local:
+git branch -D *nome do branch*
+
+Puxar alterações feitas no repositório remoto:
+git pull origin master
+
+Clonar repositório(baixar):
+git clone *url do repositório*

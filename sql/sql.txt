@@ -1,0 +1,158 @@
+Tipos de Dados Mais Comuns:
+- int
+- varchar(100)
+- decimal(10,2)
+- date
+- enum('f', 'm')
+- timestamp default current_timestamp()
+
+-------CREATE DATABASE-------
+
+Criar Database:
+CREATE DATABASE *nome do banco*;
+
+-------CREATE DATABASE-------
+
+-------USE-------
+
+Selecionar o Banco:
+USE *nome do banco*;
+
+-------USE-------
+
+-------DROP DATABASE-------
+
+*****CUIDADO*****
+Deletar Banco:
+DROP DATABASE *nome do banco*;
+*****CUIDADO*****
+
+-------DROP DATABASE-------
+
+-------CREATE TABLE-------
+
+Criar Tabela:
+CREATE TABLE *nome da tabela* (
+	*nome do campo* *tipo*,
+	*nome do campo* *tipo(número de caracteres)*
+);
+
+-------CREATE TABLE-------
+
+-------INSERT-------
+
+Inserir em Tabela:
+INSERT INTO *nome da tabela* VALUES(*int*, '*varchar*');
+
+-------INSERT-------
+
+-------SELECT-------
+
+Selecionar tudo de tabela:
+SELECT * FROM *nome da tabela*;
+
+Contar a quantidade de linhas:
+SELECT COUNT(*) AS *nome da coluna* FROM *nome da tabela*;
+
+Selecionar colunas específicas:
+SELECT  *nome da coluna*, *nome da coluna* FROM *nome da tabela*;
+
+Selecionar colunas específicas com apelidos:
+SELECT  *nome da coluna* AS *apelido*, *nome da coluna* AS *apelido*,
+*nome da coluna* * 1.1 AS 'salario com aumento de 10%'
+FROM *nome da tabela*;
+
+Selecionar colunas específicas com apelidos convertendo tipos:
+SELECT  *nome da coluna* AS *apelido*, *nome da coluna* AS *apelido*,
+CONVERT(*nome da coluna* * 1.1, DEC(10,2)) AS 'salario com aumento de 10%'
+FROM *nome da tabela*;
+
+Selecionar com WHERE:
+SELECT * FROM *nome da tabela* WHERE *nome da coluna* = 'm';
+SELECT * FROM *nome da tabela* WHERE *nome da coluna* = 1;
+SELECT * FROM *nome da tabela* WHERE *nome da coluna* = 15 AND *nome da coluna* > 1000;
+SELECT * FROM *nome da tabela* WHERE *nome da coluna* = 15 OR *nome da coluna* > 1000;
+SELECT * FROM *nome da tabela* WHERE *nome da coluna* = 'm';
+
+Selecionar com WHERE onde algum valor de uma coluna comece com uma determinada letra:
+SELECT * FROM *nome da tabela* WHERE *nome da coluna* LIKE '*letra*%';
+
+Selecionar com WHERE onde algum valor de uma coluna não comece com uma determinada letra:
+SELECT * FROM *nome da tabela* WHERE *nome da coluna* NOT LIKE '*letra*%';
+
+Selecionar com WHERE onde algum valor de uma coluna termine com uma determinada letra:
+SELECT * FROM *nome da tabela* WHERE *nome da coluna* LIKE '%*letra*';
+
+Selecionar com WHERE onde algum valor de uma coluna não termine com uma determinada letra:
+SELECT * FROM *nome da tabela* WHERE *nome da coluna* NOT LIKE '%*letra*';
+
+Selecionar com WHERE entre dois valores de uma ou mais colunas:
+SELECT * FROM *nome da tabela* WHERE *nome da coluna* BETWEEN 1000 AND 2000;
+
+Selecionar com WHERE excluindo entre dois valores de uma ou mais colunas:
+SELECT * FROM *nome da tabela* WHERE *nome da coluna* NOT BETWEEN 1000 AND 2000;
+
+Selecionar com DATE:
+SELECT * FROM *nome da tabela* WHERE *nome da coluna* > '2016-01-01';
+SELECT * FROM *nome da tabela* WHERE *nome da coluna* > '2016/01/01';
+SELECT * FROM *nome da tabela* WHERE *nome da coluna* > '2016.01.01';
+SELECT * FROM *nome da tabela* WHERE *nome da coluna* > '20160101';
+SELECT DATEDIFF(*nome da coluna*, CURRENT_DATE()) FROM *nome da tabela* WHERE *nome da coluna* = 2;
+SELECT DATEDIFF(*nome da coluna*, CURRENT_DATE()) AS 'diferença de dias' FROM *nome da tabela* WHERE *nome da coluna* = 2;
+SELECT * FROM *nome da tabela* WHERE MONT(*nome da coluna*) = 5;
+SELECT * FROM *nome da tabela* WHERE YEAR(*nome da coluna*) = 2016 AND MONTH(*nome da coluna*) = 5
+	ORDER BY *nome da coluna* LIMIT 0, 3;
+
+Selecionar com ORDER BY:
+SELECT * FROM *nome da tabela* ORDER BY *nome da coluna*;
+SELECT * FROM *nome da tabela* ORDER BY 2;
+SELECT * FROM *nome da tabela* ORDER BY *nome da coluna* DESC;
+SELECT * FROM *nome da tabela* ORDER BY *nome da coluna* DESC, *nome da coluna*;
+SELECT * FROM *nome da tabela* ORDER BY *nome da coluna* LIMIT 0, 3;
+
+-------SELECT-------
+
+-------UPDATE-------
+
+Update de Tabela:
+UPDATE *nome da tabela*
+SET *novo valor ou regra*;
+- Ex: 
+UPDATE tb_funcionarios
+SET salario = salario * 1.1;
+
+UPDATE com WHERE:
+UPDATE *nome da tabela* SET *nome da coluna* = *nome da coluna* * 1.4 WHERE *nome da coluna* = 3;
+UPDATE *nome da tabela* SET *nome da coluna* = 3000 WHERE *nome da coluna* = 5;
+UPDATE *nome da tabela* SET *nome da coluna* = 4000 *nome da coluna* = '2015-12-20' WHERE *nome da coluna* = 1000 AND *nome da coluna* = 'm';
+UPDATE *nome da tabela* SET *nome da coluna* = 4000,50 WHERE *nome da coluna* = 7;
+
+UPDATE com DATE:
+UPDATE *nome da tabela* SET *nome da coluna* = CURRENT_DATE() WHERE *nome da coluna* = 1;
+UPDATE *nome da tabela* SET *nome da coluna* = DATE_ADD(CURRENT_DATE(), INTERVAL 60 DAY) WHERE *nome da coluna* = 2;
+
+-------DELETE-------
+
+DELETE FROM *nome da tabela* WHERE *nome da coluna* = 1;
+
+-------DELETE-------
+
+-------TRANSACTION, ROLLBACK E COMMIT-------
+
+Fazendo alteração e voltando atrás:
+START TRANSACTION;
+DELETE FROM *nome da tabela*;
+ROLLBACK;
+COMMIT;
+
+*COMMIT confirma a ação
+
+-------TRANSACTION, ROLLBACK E COMMIT-------
+
+-------TRUNCATE-------
+
+TRUNCATE TABLE *nome da tabela*;
+
+*TRUNCATE redefine a tabela toda
+
+-------TRUNCATE-------
