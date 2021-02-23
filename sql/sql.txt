@@ -29,6 +29,12 @@ DROP DATABASE *nome do banco*;
 
 -------DROP DATABASE-------
 
+-------DROP TABLE-------
+
+DROP TABLE *nome da tabela*;
+
+-------DROP TABLE-------
+
 -------CREATE TABLE-------
 
 Criar Tabela:
@@ -156,3 +162,116 @@ TRUNCATE TABLE *nome da tabela*;
 *TRUNCATE redefine a tabela toda
 
 -------TRUNCATE-------
+
+-------Relacionando Tabelas-------
+
+PK:
+CREATE TABLE *nome da tabela* (
+	idpessoa INT AUTO_INCREMENT NOT NULL,
+	desnome VARCHAR(256) NOT NULL,
+	dtcadastro TIMESTAMP NOT NULL CURRENT_TIMESTAMP(),
+	CONSTRAINT PK_pessoas PRIMARY KEY (idpessoa)
+) ENGINE = InnoDB;
+
+FK:
+CREATE TABLE *nome da tabela* (
+	idfuncionario INT AUTO_INCREMENT NOT NULL,
+	idpessoa INT NOT NULL,
+	vlsalario  DECIMAL(10,2) NOT NULL DEFAULT 1000.00,
+	dtadmissao DATE NOT NULL,
+	CONSTRAINT PK_funcionarios PRIMARY KEY (idfuncionario),
+	CONSTRAINT FK_funcionarios_pessoas FOREIGN KEY (idpessoa)
+		REFERENCES tb_pessoas (idpessoa)
+);
+
+-------Relacionando Tabelas-------
+
+-------Joins-------
+
+SELECT * FROM *nome da tabela 1* a
+INNER JOIN *nome da tabela 2* b ON a.idpessoa = b.idpessoa;
+
+SELECT * FROM *nome da tabela 1*
+INNER JOIN *nome da tabela 2* USING(idpessoa);
+
+SELECT * FROM *nome da tabela 1* a
+LEFT JOIN *nome da tabela 2* b ON a.idpessoa = b.idpessoa;
+
+-------Joins-------
+
+-------Subquery-------
+
+DELETE FROM *nome da tabela* WHERE idpessoa IN(SELECT *nome da coluna* FROM *nome da tabela* WHERE *nome da coluna* LIKE 'J%');
+
+-------Subquery-------
+
+-------HAVING-------
+
+SELECT *nome da coluna*
+FROM *condição*
+WHERE condition
+GROUP BY *nome da coluna*
+HAVING *condição*
+ORDER BY *nome da coluna*;
+
+-------HAVING-------
+
+-------VIEW-------
+
+CREATE VIEW *nome da view* 
+	SELECT * FROM *nome da tabela*;
+
+SELECT * FROM *nome da view*;
+
+-------VIEW-------
+
+-------PROCEDURE-------
+
+DELIMITER $$;
+
+CREATE PROCEDURE *nome da procedure* (
+pdesnome VARCHAR(256)
+)
+BEGIN
+	INSERT INTO *nome da tabela* VALUES(NULL, pdesnome, NULL);
+
+	SELECT * FROM *nome da tabela* WHERE idpessoa = last_insert_id();
+
+END $$
+
+DELIMITER ;
+
+CALL *nome da procedure*('*parametro*');
+
+-------PROCEDURE-------
+
+-------Funções-------
+
+DELIMITER $$;
+
+CREATE FUNCTION *nome da função* (
+pvlsalario DECIMAL(10,2)
+)
+RETURNS DEC(10,2)
+BEGIN
+
+	DECLARE vimposto DECIMAL(10,2)
+
+	/*
+
+		Comentário
+
+	*/
+
+	SET vimposto = CASE
+		WHEN pvlsalario <= 1903.98 THEN 0
+		WHEN pvlsalario >= 1903.99 THEN 2
+	END;
+
+	RETURN vimposto;
+
+END $$
+
+DELIMITER ;
+
+-------Funções-------
